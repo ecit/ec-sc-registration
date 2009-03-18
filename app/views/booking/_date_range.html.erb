@@ -1,0 +1,7 @@
+<div class=<%= @additional_date_range ? "additional_date_range" : "date_range" %>>
+<p>
+   <strong>Date and time you arrive</strong>: <select><option>16</option></select> <select><option>August</option></select> <select><option>morning</option><option>afternoon</option><option>evening</option></select>
+   <%= link_to_function "Remove this date range", "remove_element(this, '.additional_date_range')", :class => 'remove' if @additional_date_range %>
+</p>
+<p><strong>Date and time you leave</strong>: <select><option>16</option></select> <select><option>August</option></select> <select><option>morning</option><option>afternoon</option><option>evening</option></select></p>
+</div>

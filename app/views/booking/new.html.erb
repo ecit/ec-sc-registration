@@ -1,0 +1,30 @@
+<div class="container">
+	<h1>Register for the Summer Course</h1>
+	
+	<% form_tag booking_path, :method => 'get' do %>
+	<div class="section">
+		<h2>Which days will you attend?</h2>
+		<%= render :partial => 'course_schedule' %>
+
+		<div class="inner">
+		  <div id="date_ranges">
+		  <%= render :partial => 'date_range' %>
+		  </div>
+		  <p>Note that if you are registering a group or family, this date range applies to everybody in the group.</p>
+		  <p><%= button_to_remote "Add another date range", :url => { :controller => 'booking', :action => 'add_date_range' } %> if you plan to leave the course for a day or more and come back again.</p>
+		</div>
+	</div>
+
+	<div class="section">
+		<h2>Enter your information</h2>
+		<%= render :partial => 'person' %>
+	</div>
+
+	<div class="section" style="border-top: 1px solid red;">
+		<div class="inner">
+			<p>You're almost done! Next you will see the price and review that your information is correct.</p>
+			<p><span style="font-size: 24px; line-height: 16px; font-weight: bold;">&raquo;</span> <%= submit_tag "Continue" %> to see the total price and choose payment options.</p>
+		</div>
+	</div>
+	<% end %>
+</div>
