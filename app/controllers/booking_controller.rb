@@ -5,17 +5,18 @@ class BookingController < ApplicationController
   
   def new
     @booking = Booking.new
+    @booking.people.build
+    @booking.date_ranges.build
   end
   
   def create
-    debugger
   end
   
   def add_date_range
     @additional_date_range = true
     
     render :update do |page|
-      page.insert_html :bottom, :date_ranges, :partial => 'date_range'
+      page.insert_html :bottom, :date_ranges, :partial => 'date_range', :object => DateRange.new
       page.visual_effect :highlight, :date_ranges
     end
   end
@@ -25,7 +26,7 @@ class BookingController < ApplicationController
     @kind = params[:kind]
     
     render :update do |page|
-      page.insert_html :bottom, :people, :partial => 'person'
+      page.insert_html :bottom, :people, :partial => 'person', :object => Person.new
       page.visual_effect :highlight, :people
     end
   end

@@ -5,17 +5,21 @@
 	<% if @group %>
 	<h3>
 	   <%= link_to_function "Remove this person", "remove_element(this, '.other_person')", :class => 'remove' %>
-		<%= @kind %> in your group
+	   <%= @kind %> in your group
 	</h3>
 	<% end %>
+	<% new_or_existing = person.new_record? ? 'new' : 'existing' %>
+	<% prefix = "booking[#{new_or_existing}_person_attributes][]" %>
+
+	<% fields_for prefix, person do |person_form| -%>	
 	<table class="form">
 		<tr>
 			<th>First Name</th>
-			<td><%= text_field :person, :first_name %></td>
+			<td><%= person_form.text_field :first_name %></td>
 		</tr>
 		<tr>
 			<th>Last Name</th>
-			<td><%= text_field :person, :last_name %></td>
+			<td><%= person_form.text_field :last_name %></td>
 		</tr>
 		<% if @kind == "Child" %>
 		<tr>
@@ -46,11 +50,11 @@
 		</tr>
 		<tr>
 			<th>Email</th>
-			<td><%= text_field :person, :email %></td>
+			<td><%= person_form.text_field :email %></td>
 		</tr>
 		<tr>
 			<th>Mobile phone</th>
-			<td><%= text_field :person, :phone_number %></td>
+			<td><%= person_form.text_field :phone_number %></td>
 		</tr>
 		<tr>
 			<th>Parent?</th>
@@ -62,6 +66,7 @@
 		</tr>
 		<% end %>
 	</table>
+	<% end %>
 </div>
 
 <% unless @group %>	
