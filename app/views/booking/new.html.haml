@@ -1,0 +1,26 @@
+.container
+  %h1 Register for the Summer Course
+  = error_messages_for :booking
+  - form_for :booking, :url => { :action => 'create' } do |f|
+    .section
+      %h2 Which days will you attend?
+      = render :partial => 'course_schedule'
+      .inner
+        #date_ranges
+          = render :partial => 'date_range', :locals => { :f => f }
+        %p
+          Note that if you are registering a group or family, this date range applies to everybody in the group.
+        %p
+          = button_to_remote "Add another date range", :url => { :controller => 'booking', :action => 'add_date_range' }
+          if you plan to leave the course for a day or more and come back again.
+    .section
+      %h2 Enter your information
+      = render :partial => 'person', :collection => @booking.people, :locals => { :f => f }
+    .section{ :style => "border-top: 1px solid red;" }
+      .inner
+        %p
+          You're almost done! Next you will see the price and review that your information is correct.
+        %p
+          %span.raquo &raquo;
+          = submit_tag "Continue"
+          to see the total price and choose payment options.

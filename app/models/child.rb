@@ -19,10 +19,5 @@
 #  updated_at   :datetime
 #
 
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+class Child < Person
+end
