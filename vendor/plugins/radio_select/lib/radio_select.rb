@@ -13,9 +13,10 @@ module ActionView
         add_default_name_and_id(html_options)
         name = html_options.delete 'name'
         value = value(object)
+        delimiter = options.delete(:delimiter) || ' '
         choices.map do |choice|
           label_tag "#{name}_#{choice[1]}", "#{radio_button_tag name, choice[1], choice[1] == value}#{choice[0]}"
-        end.join " "
+        end.join delimiter
       end
     end
     
