@@ -23,4 +23,10 @@
 class Person < ActiveRecord::Base
   belongs_to :booking
   validates_presence_of :first_name, :last_name
+  private
+  def attributes_protected_by_default
+    default = super
+    default.delete self.class.inheritance_column
+    default
+  end
 end

@@ -1,7 +1,7 @@
 <%= f.hidden_field :type %>
 <%= f.text_field :first_name, :label => 'First Name' %>
 <%= f.text_field :last_name, :label => 'Last Name' %>
-<% if @person.class == Child %>
+<% if person.class == Child %>
   <%= f.radio_select :age, [[' 4 or younger', 0], [' 5-12', 1], [' 13-18', 2]], :label => 'Age', :delimiter => '<br />' %>
 <% else %>
   <%= f.localized_country_select :country,  [], :include_blank => 'Please choose...', :label => 'Country' %>

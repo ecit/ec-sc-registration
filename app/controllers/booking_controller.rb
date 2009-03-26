@@ -1,6 +1,6 @@
 class BookingController < ApplicationController
   def index
-    render :new
+    redirect_to :action => "new"
   end
   
   def new
@@ -15,6 +15,7 @@ class BookingController < ApplicationController
       flash[:notice] = 'Booking was successfully created.'
       redirect_to @booking
     else
+      @errors = true
       render :action => "new"
     end
   end

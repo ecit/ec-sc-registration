@@ -38,7 +38,7 @@ div.section {
 div.other_person {
   margin: 14px 0 10px 0;
   padding: 5px 5px 15px 5px;
-  width: 500px;
+  width: 695px;
   border: 1px dashed #aaa;
   background: #f5f5f5; }
 div.add_people input {
@@ -48,7 +48,8 @@ div.additional_date_range {
   border-bottom: 1px dashed #aaa;
   background: #f5f5f5;
   margin-left: -5px;
-  padding-left: 5px; }
+  padding-left: 5px;
+  margin-top:10px; }
 div#date_ranges {
   width: 550px; }
 div#people {
@@ -130,3 +131,7 @@ h2 {
 h3 {
   font-size: 14px;
   margin: 0 0 14px 0; }
+
+.error {
+	color:red;
+}

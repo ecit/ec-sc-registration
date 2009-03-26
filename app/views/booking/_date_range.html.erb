@@ -1,7 +1,9 @@
 <div class=<%= @additional_date_range ? "additional_date_range" : "date_range" %>>
-<p>
-   <strong>Date and time you arrive</strong>: <select><option>16</option></select> <select><option>August</option></select> <select><option>morning</option><option>afternoon</option><option>evening</option></select>
-   <%= link_to_function "Remove this date range", "remove_element(this, '.additional_date_range')", :class => 'remove' if @additional_date_range %>
-</p>
-<p><strong>Date and time you leave</strong>: <select><option>16</option></select> <select><option>August</option></select> <select><option>morning</option><option>afternoon</option><option>evening</option></select></p>
+  <%= link_to_function "Remove this date range", "$(this).up('.additional_date_range').remove()", :class => 'remove' if @additional_date_range %>
+	
+  <% new_or_existing = date_range.new_record? ? 'new' : 'existing' %>
+  <% prefix = "booking[#{new_or_existing}_date_range_attributes][]" %>
+  <% fields_for prefix, date_range, :builder => ErrorHandlingFormBuilder do |date_range_form| %>
+    <%= render :partial => 'date_range_form', :locals => { :f => date_range_form, :new_record => new_or_existing }, :layout => 'layouts/form' %>
+  <% end %>
 </div>

@@ -26,4 +26,10 @@ class Booking < ActiveRecord::Base
       self.people << person.new(attributes)
     end 
   end
+
+  def new_date_range_attributes=(date_range_attributes)
+    date_range_attributes.each do |attributes|
+      date_ranges.build(attributes)
+    end 
+  end
 end

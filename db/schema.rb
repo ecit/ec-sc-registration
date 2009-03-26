@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(:version => 20090317141210) do
   end
 
   create_table "date_ranges", :force => true do |t|
-    t.date     "start"
-    t.date     "end"
-    t.integer  "arrival"
-    t.integer  "departure"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "arrival_time"
+    t.integer  "departure_time"
     t.integer  "booking_id"
     t.datetime "created_at"
     t.datetime "updated_at"
