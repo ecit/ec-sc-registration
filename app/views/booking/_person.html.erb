@@ -1,0 +1,37 @@
+<div class=<%= @group ? "other_person" : "inner" %>>
+  <% if @group %>
+    <h3>
+      <%= link_to_function "Remove this person", "$(this).up('.other_person').remove()", :class => 'remove' %>
+      <%= person.class == Child ? 'Child' : 'Adult' %>
+      in your group
+	</h3>
+  <% else %>
+    <p>
+      You must be an adult to register. If you are attending with children, you may add them in the next section.
+    </p>
+  <% end %>
+  <% new_or_existing = person.new_record? ? 'new' : 'existing' %>
+  <% prefix = "booking[#{new_or_existing}_person_attributes][]" %>
+  <% fields_for prefix, person, :builder => ErrorHandlingFormBuilder do |person_form| %>
+    <%= render :partial => 'person_form', :locals => { :f => person_form }, :layout => 'layouts/form' %>
+  <% end %>
+</div>
+<% unless @group %>
+<div class="section">
+  <h2>
+    Are you registering a group or a family?
+  </h2>
+  <div class="inner">
+    <p>
+      You can add other people to your registration if you are paying for the group and everyone in the group will attend the course on the same days.
+    </p>
+    <div id="people"></div>
+    <div class="add_people">
+      <span
+        <%= button_to_remote "Add a child to your group", :url => { :action => 'add_person', :kind => 'child' } %>
+        <%= button_to_remote "Add another adult to your group", :url => { :action => 'add_person', :kind => 'adult' } %>
+	  </span>
+	</div>
+  </div>
+</div>
+<% end %>

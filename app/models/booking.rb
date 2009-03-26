@@ -12,7 +12,7 @@
 class Booking < ActiveRecord::Base
   has_many :people
   has_many :date_ranges
-  
+    
   def new_person_attributes=(person_attributes)
     person_attributes.each do |attributes|
       type = attributes[:type]
