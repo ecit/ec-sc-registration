@@ -1,6 +1,6 @@
 <div class="container">
   <h1> Register for the Summer Course</h1>
-  <%= error_messages_for :object => @booking.people %>
+  <%= error_messages_for :object => @booking.date_ranges, :object => @booking.people %>
   <% form_for :booking, :url => { :action => 'create' } do |f| %>
     <div class="section">
       <h2> Which days will you attend? </h2>

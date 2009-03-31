@@ -21,4 +21,5 @@
 #
 
 class Child < Person
+  validates_presence_of :age, :message => "needs to be chosen"
 end

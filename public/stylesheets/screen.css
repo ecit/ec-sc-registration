@@ -135,3 +135,6 @@ h3 {
 .error {
 	color:red;
 }
+.fieldWithErrors {
+	display:inline;
+}

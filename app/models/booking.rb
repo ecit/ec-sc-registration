@@ -13,6 +13,15 @@ class Booking < ActiveRecord::Base
   has_many :people
   has_many :date_ranges
     
+  validates_associated :people
+  validates_associated :date_ranges
+  
+  before_create :make_booking_code
+  
+  def make_booking_code
+    self.code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+  end
+    
   def new_person_attributes=(person_attributes)
     person_attributes.each do |attributes|
       type = attributes[:type]

@@ -1,5 +1,5 @@
-<div class=<%= @additional_date_range ? "additional_date_range" : "date_range" %>>
-  <%= link_to_function "Remove this date range", "$(this).up('.additional_date_range').remove()", :class => 'remove' if @additional_date_range %>
+<div class=<%= additional(date_range) ? "additional_date_range" : "date_range" %>>
+  <%= link_to_function "Remove this date range", "$(this).up('.additional_date_range').remove()", :class => 'remove' if additional(date_range) %>
 	
   <% new_or_existing = date_range.new_record? ? 'new' : 'existing' %>
   <% prefix = "booking[#{new_or_existing}_date_range_attributes][]" %>
