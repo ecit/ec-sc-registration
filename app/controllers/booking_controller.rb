@@ -11,6 +11,10 @@ class BookingController < ApplicationController
   
   def create
     @booking = Booking.new params[:booking]
+
+    #@booking.date_ranges[1..params[:booking][:new_date_range_attributes].length].each {|date_range| @booking.date_ranges.delete(date_range) if (@booking.date_ranges - date_range).include?(date_range)}
+    @booking.people[1..params[:booking][:new_person_attributes].length].each {|person| @booking.people.delete(person) if (person.first_name.empty? and person.last_name.empty?) }
+    
     if @booking.save
       flash[:notice] = 'Booking was successfully created.'
       redirect_to @booking
@@ -22,6 +26,14 @@ class BookingController < ApplicationController
 
   def show
     @booking = Booking.find params[:id]
+  end
+  
+  def edit
+    @booking = Booking.find_by_code params[:code]
+    render :action => "new"
+  end
+  
+  def update
   end
   
   def add_date_range

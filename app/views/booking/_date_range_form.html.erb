@@ -1,4 +1,0 @@
-<%= f.date_select :start_date, :index => (:new_record == 'new' ? '' : nil), :default => { :day => 4, :month => 8 }, :discard_year => true, :order => [:day, :month], :label => "<strong>Date you arrive</strong>:" -%>
-<%= f.select :arrival_time, [['morning', 0], ['afternoon', 1], ['evening', 2]], :selected => 0, :label => "arriving in the " %>
-<%= f.date_select :end_date, :index => (:new_record == 'new' ? '' : nil), :default => { :day => 16, :month => 8}, :discard_year => true, :order => [:day, :month], :label => "<strong>Date you leave</strong>:" %>
-<%= f.select :departure_time, [['morning', 0], ['afternoon', 1], ['evening', 2]], :selected => 2, :label => "arriving in the " %>

@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
   
   map.resources :booking, :collection => { :add_date_range => :post, :add_person => :post }
-
+  map.edit 'booking/:code/edit', :controller => 'booking', :action => 'edit', :code => 'code'
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
