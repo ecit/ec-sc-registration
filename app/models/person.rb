@@ -23,6 +23,10 @@
 class Person < ActiveRecord::Base
   belongs_to :booking
   validates_presence_of :first_name, :last_name, :message => "is required"
+
+  def delete_empty
+    @booking.people[1..params[:booking][:new_person_attributes].length].each {|person| @booking.people.delete(person) if (person.first_name.empty? and person.last_name.empty?) }
+  end
   
   private
 

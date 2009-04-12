@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/localized_country_select"]
 	path = vendor/plugins/localized_country_select
 	url = git://github.com/karmi/localized_country_select.git
+[submodule "vendor/plugins/fast_remote_cache"]
+	path = vendor/plugins/fast_remote_cache
+	url = git://github.com/37signals/fast_remote_cache.git
