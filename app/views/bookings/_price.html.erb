@@ -1,0 +1,56 @@
+<table class="invoice" style="border-collapse: collapse; margin-top: 20px;">
+	<tr>
+		<th>Person</th>
+		<th>Price Class</th>
+		<th>Price </th>
+		<th>Days</th>
+		<th>Total</th>
+	</tr>
+	<tr class="person">
+		<td rowspan="2"><%= @booking.people.first.first_name %></td>
+		<td>Summer Course Days [EU Resident]</td>
+		<td>45</td>
+		<td>10</td>
+		<td>450</td>
+	</tr>
+	<tr>
+		<td>Before/After Days [Helper]</td>
+		<td>10</td>
+		<td>3</td>
+		<td>30</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Total</td>
+		<td>480</td>
+	</tr>
+	<tr class="person">
+		<td rowspan="2">Peter Toma</td>
+		<td>Summer Course Days [Non-EU Resident]</td>
+		<td>35</td>
+		<td>10</td>
+		<td>350</td>
+	</tr>
+	<tr>
+		<td>Before/After Days [Visitor]</td>
+		<td>10</td>
+		<td>3</td>
+		<td>30</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Total</td>
+		<td>380</td>
+	</tr>
+	<tr class="grand_total">
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Grand total</td>
+		<td>860</td>
+	</tr>
+</table>
