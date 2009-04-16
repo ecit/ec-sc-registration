@@ -1,17 +1,12 @@
-<div class=<%= additional(date_range) ? "additional_date_range" : "date_range" %>>
-  <%= link_to_function "Remove this range", "$(this).up('.additional_date_range').remove()", :class => 'remove' if additional(date_range) %>
+<div class=<%= @first_date_range ? "date_range" : "additional_date_range" %>>
+	<%= remove_form_link "remove this date range", f, "additional_date_range" unless @first_date_range %>
 	
-  <% new_or_existing = date_range.new_record? ? 'new' : 'existing' %>
-  <% prefix = "booking[#{new_or_existing}_date_range_attributes][]" %>
-  <% fields_for prefix, date_range do |f| %>
     <p><strong>Date and time you arrive</strong>:
-    <%= f.date_select :start_date, :index => (new_or_existing == 'new' ? '' : nil), :default => { :day => 4, :month => 8 },
- 		:discard_year => true, :order => [:day, :month] -%>
+    <%= f.date_select :start_date, :default => { :day => 4, :month => 8 }, :discard_year => true, :order => [:day, :month] -%>
     <%= f.select :arrival_time, [['morning', 0], ['afternoon', 1], ['evening', 2]], :selected => 0 %></p>
 
     <p><strong>Date and time you leave</strong>:
-    <%= f.date_select :end_date, :index => (new_or_existing == 'new' ? '' : nil), :default => { :day => 16, :month => 8},
- 		:discard_year => true, :order => [:day, :month] %>
+    <%= f.date_select :end_date, :default => { :day => 16, :month => 8}, :discard_year => true, :order => [:day, :month] %>
     <%= f.select :departure_time, [['morning', 0], ['afternoon', 1], ['evening', 2]], :selected => 2 %></p>
-  <% end %>
 </div>
+<% @first_date_range = false %>

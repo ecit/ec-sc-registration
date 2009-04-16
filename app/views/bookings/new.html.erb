@@ -1,50 +1,5 @@
 <div class="container">
   <h1> Register for the Summer Course</h1>
 
-  <%= error_messages_for :date_range, :object => @booking.date_ranges %>
-  <%= error_messages_for :person, :object => @booking.people %>
-
-  <% form_for @booking do |f| %>
-    <div class="section">
-      <h2> Which days will you attend? </h2>
-      <%= render :partial => 'course_schedule' %>
-      <div class="inner">
-        <div id="date_ranges">
-          <%= render :partial => 'date_range', :collection => @booking.date_ranges, :locals => { :f => f } %>
-		</div>
-        <p>
-          Note that if you are registering a group or family, this date range applies to everybody in the group.
-		</p>
-        <p>
-          <%= button_to_remote "Add another date range", :url => { :action => 'add_date_range' } %>
-          if you plan to leave the course for a day or more and come back again.
-		</p>
-	  </div>
-    </div>
-    <div class="section">
-      <h2> Enter your information </h2>
-      <%= render :partial => 'person', :collection => @booking.people, :locals => { :f => f } %>
-		<% if @errors %>
-		<div id="people"></div>
-	  	<% end %>
-	    <div class="add_people">
-	      <span
-	        <%= button_to_remote "Add a child to your group", :url => { :action => 'add_person', :kind => 'child' } %>
-	        <%= button_to_remote "Add another adult to your group", :url => { :action => 'add_person', :kind => 'adult' } %>
-		  </span>
-		</div>
-    </div>
-    <div class="section" style ="border-top: 1px solid red;">
-      <div class="inner">
-        <p>
-          You're almost done! Next you will see the price and review that your information is correct.
-		</p>
-        <p>
-          <span class="raquo">&raquo;</span>
-          <%= submit_tag "Continue" %>
-          to see the total price and choose payment options.
-		</p>
-	  </div>
-	</div>
-  <% end %>
+  <%= render :partial => 'form' %>
 </div>

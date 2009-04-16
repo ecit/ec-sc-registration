@@ -1,62 +1,9 @@
 <table class="itinerary">
-	<tr class="no_program">
-		<td>Arrive in morning</td>
-		<td>28 Sep</td>
-		<td>Building up</td>
+	<% @booking.days_in_itinerary.each do |day| %>
+	<tr class=<%= in_program?(day[:date]) ? "program" : "no_program" %>>
+		<td><%= day[:arriving_or_departing] %></td>
+		<td><%= format_date(day[:date]) %></td>
+		<td><%= day[:program] %></td>
 	</tr>
-	<tr class="no_program">
-		<td></td>
-		<td>. . .</td>
-		<td>Building up</td>
-	</tr>
-	<tr class="no_program">
-		<td></td>
-		<td>3 Aug</td>
-		<td>Building up</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>4 Aug</td>
-		<td>Karmapa Teaching</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>5 Aug</td>
-		<td>Karmapa Teaching</td>
-	</tr>
-	<tr class="program">
-		<td>Depart in evening</td>
-		<td>6 Aug</td>
-		<td>Karmapa Teaching</td>
-	</tr>
-	<tr class="program">
-		<td>Arrive in evening</td>
-		<td>10 Aug</td>
-		<td>Phowa</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>11 Aug</td>
-		<td>Phowa</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>12 Aug</td>
-		<td>Phowa</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>13 Aug</td>
-		<td>Phowa</td>
-	</tr>
-	<tr class="program">
-		<td></td>
-		<td>14 Aug</td>
-		<td>Lecture</td>
-	</tr>
-	<tr class="no_program">
-		<td>Depart in morning</td>
-		<td>15 Aug</td>
-		<td>Dissolving</td>
-	</tr>
+	<% end %>
 </table>

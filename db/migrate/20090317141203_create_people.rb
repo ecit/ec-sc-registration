@@ -13,6 +13,7 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean :parent
       t.boolean :low_income
       t.boolean :helper
+      t.boolean :stay_on_site
       t.timestamps
     end
   end

@@ -1,22 +1,81 @@
-<div class=<%= group_booking(person) ? "other_person" : "inner" %>>
-  <% if group_booking(person) %>
-    <h3>
-      <%= link_to_function "Remove this person", "$(this).up('.other_person').remove()", :class => 'remove' %>
-      <%= person.class == Child ? 'Child' : 'Adult' %>
-      in your group
-	</h3>
-  <% else %>
-    <p>
-      You must be an adult to register. If you are attending with children, you may add them in the next section.
-    </p>
-  <% end %>
-  <% new_or_existing = person.new_record? ? 'new' : 'existing' %>
-  <% prefix = "booking[#{new_or_existing}_person_attributes][]" %>
-  <% fields_for prefix, person, :builder => ErrorHandlingFormBuilder do |person_form| %>
-    <%= render :partial => 'person_form', :locals => { :f => person_form, :person => person }, :layout => 'layouts/form' %>
-  <% end %>
+<div class=<%= @first_person ? "inner" : "other_person" %>>
+  <%= remove_form_link "remove this person", f, "other_person" unless @first_person %>
+
+    <% unless @first_person %>
+      <h3>
+        <%= person == Child ? 'Child' : 'Adult' %> in your group
+	  </h3>
+    <% else %>
+      <p>
+        You must be an adult to register. If you are attending with children, you may add them in the next section.
+      </p>
+    <% end %>
+
+	<%= f.hidden_field :type, :value => person %>
+	<table class="form">
+		<tr>
+			<th>First Name</th>
+			<td><%= f.text_field :first_name %></td>
+			<td class="error"><%= error_message(:first_name, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Last Name</th>
+			<td><%= f.text_field :last_name %></td>
+		    <td class="error"><%= error_message(:last_name, f.object) %></td>
+		</tr>
+		<% if person == Child %>
+		<tr>
+			<th>Age</th>
+			<td><%= f.radio_select :age, [[' 4 or younger', 0], [' 5-12', 1], [' 13-18', 2]], :include_blank => 'Please choose...', :delimiter => '<br />' %></td>
+			<td class="error"><%= error_message(:age, f.object) %></td>
+		</tr>
+		<% else %>
+		<tr>
+			<th>Country</th>
+			<td>
+				<%= f.localized_country_select :country,  PRIORITY_COUNTRIES, :include_blank => 'Please choose...' %> 
+				<span style="font-size: 12px; color: #666;">
+					<%= f.check_box :low_income %> Low income
+				</span>
+			</td>
+			<td class="error"><%= error_message(:country, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Sex</th>
+			<td>
+				<%= f.radio_select :sex, [['Male', 'm'], ['Female', 'f']], :include_blank => 'Please choose...' %>
+				<td class="error"><%= error_message(:sex, f.object) %></td>
+			</td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td><%= f.text_field :email, :label => 'Email' %></td>
+			<td class="error"><%= error_message(:email, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Mobile phone</th>
+			<td><%= f.text_field :phone_number, :label => 'Mobile phone' %></td>
+			<td class="error"><%= error_message(:phone_number, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Parent?</th>
+			<td><label><%= f.check_box :parent %><%= "#{this_person_is_or_i_am}" %> bringing a child under 13 to the course</label></td>
+			<td class="error"><%= error_message(:parent, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Staying on site?</th>
+			<td><label><%= f.check_box :stay_on_site %><%= "#{this_person_is_or_i_am}" %> camping at the EC</label></td>
+			<td class="error"><%= error_message(:stay_on_site, f.object) %></td>
+		</tr>
+		<tr>
+			<th>Helping before/after?</th>
+			<td><label><%= f.check_box :helper %><%= "#{this_person_is_or_i_am}" %> helping on the days I stay before and after the course <span style="color: #666; font-size: 12px;">(<a href="">Learn how to help</a>)</span></td>
+			<td class="error"><%= error_message(:helper, f.object) %></td>
+		</tr>
+		<% end %>
+	</table>
 </div>
-<% unless group_booking(person) %>
+<% if @first_person %>
 <div class="section">
   <h2>
     Are you registering a group or a family?
@@ -25,8 +84,9 @@
     <p>
       You can add other people to your registration if you are paying for the group and everyone in the group will attend the course on the same days.
     </p>
-    <% unless @errors %>
+    <% unless @first_person %>
     <div id="people"></div>
 	<% end %>
   </div>
+  <% @first_person = false %>
 <% end %>

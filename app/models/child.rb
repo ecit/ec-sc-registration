@@ -21,5 +21,7 @@
 #
 
 class Child < Person
+  belongs_to :booking
+  
   validates_presence_of :age, :message => "needs to be chosen"
 end
