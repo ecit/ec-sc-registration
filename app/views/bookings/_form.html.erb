@@ -1,0 +1,54 @@
+<%= error_messages_for :booking %>
+
+<% form_for @booking do |booking_form| -%>
+	<div class="section">
+		<h2> Which days will you attend? </h2>
+		<%= render :partial => 'course_schedule' %>
+		
+		<div class="inner">
+			<div id="date_ranges">
+		    	<% booking_form.fields_for :date_ranges do |date_range_form| %>
+		    		<%= render :partial => 'date_range', :locals => { :f => date_range_form } %>
+				<% end %>
+			</div>
+			<p>
+				Note that if you are registering a group or family, this date range applies to everybody in the group.
+			</p>
+			<p>
+				<%= add_date_range_link 'Add another date range', booking_form %>
+				if you plan to leave the course for a day or more and come back again.
+			</p>
+		</div>
+	</div>
+
+	<div class="section">
+		<h2> Enter your information </h2>
+		<div class="inner">
+			<% [:adults, :children].each do |kind| %>
+		    	<% booking_form.fields_for kind do |person_form| %>
+		    		<%= render :partial => 'person', :locals => { :f => person_form, :person => kind.to_s.capitalize.singularize.constantize } %>
+				<% end %>
+			<% end %>
+		</div>
+		<div id="people"></div>
+		<div class="add_people">
+			<span>
+				<%= add_person_link 'Add a child to your group', booking_form, Child %>
+				<%= add_person_link 'Add another adult to your group', booking_form, Adult %>
+			</span>
+		</div>
+	</div>
+
+	<div class="section" style ="border-top: 1px solid red;">
+		<div class="inner">
+			<p>
+				You're almost done! Next you will see the price and review that your information is correct.
+			</p>
+			<p>
+				<span class="raquo">&raquo;</span>
+				<%= booking_form.submit "Continue" %>
+				to see the total price and choose payment options.
+			</p>
+		</div>
+	</div>
+<% end %>
