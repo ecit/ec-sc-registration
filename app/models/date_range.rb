@@ -31,11 +31,13 @@ class DateRange < ActiveRecord::Base
     errors.add("departure before arrival ") if self.end_date < self.start_date
   end
   
+  def nr_of_days
+    end_date.yday - start_date.yday + 1
+  end
+  
   def dates
     dates = []
     day = 0
-    
-    nr_of_days = end_date.yday - start_date.yday + 1
     
     nr_of_days.times do
       date = start_date + day

@@ -10,6 +10,7 @@
 #
 
 class Booking < ActiveRecord::Base
+  has_many :people
   has_many :adults, :dependent => :destroy
   has_many :children, :dependent => :destroy
   has_many :date_ranges, :dependent => :destroy

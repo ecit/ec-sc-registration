@@ -7,6 +7,8 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find_by_code params[:id]
+    @days = 0
+    @booking.date_ranges.each {|date_range| @days += date_range.nr_of_days}
   end
   
   def new
