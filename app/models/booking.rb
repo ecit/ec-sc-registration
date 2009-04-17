@@ -24,6 +24,10 @@ class Booking < ActiveRecord::Base
   accepts_nested_attributes_for :adults, :allow_destroy => true#, :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
   accepts_nested_attributes_for :children, :allow_destroy => true#, :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
   accepts_nested_attributes_for :date_ranges, :allow_destroy => true #, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  
+  def to_param
+    self.code
+  end
 
   def days_in_itinerary
     days = []

@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find params[:id]
+    @booking = Booking.find_by_code params[:id]
   end
   
   def new
@@ -26,11 +26,11 @@ class BookingsController < ApplicationController
   end
   
   def edit
-    @booking = Booking.find params[:id]
+    @booking = Booking.find_by_code params[:id]
   end
   
   def update
-    @booking = Booking.find params[:id]
+    @booking = Booking.find_by_code params[:id]
     @booking.attributes = params[:booking]
     if @booking.save
       redirect_to @booking
