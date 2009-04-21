@@ -1,8 +1,8 @@
 <div class=<%= @first_date_range ? "date_range" : "additional_date_range" %>>
-	<%= remove_form_link "remove this date range", f, "additional_date_range" unless @first_date_range %>
+	<%= remove_form_link "remove this range", f, "additional_date_range" unless @first_date_range %>
 	
     <p><strong>Date and time you arrive</strong>:
-    <%= f.date_select :start_date, :default => { :day => 4, :month => 8 }, :discard_year => true, :order => [:day, :month] -%>
+    <%= f.date_select :start_date, :default => { :day => 4, :month => 8 }, :start_month => 7, :discard_year => true, :order => [:day, :month] -%>
     <%= f.select :arrival_time, [['morning', 0], ['afternoon', 1], ['evening', 2]], :selected => 0 %></p>
 
     <p><strong>Date and time you leave</strong>:

@@ -31,7 +31,7 @@ module BookingsHelper
   end
   
   def format_date(date)
-    "#{Date::DAYNAMES[date.wday].first(3)} #{date.day} #{Date::MONTHNAMES[date.mon].first(3)}"
+    "#{Date::DAYNAMES[date.wday].first(3)} #{date.day} #{Date::MONTHNAMES[date.mon].first(3)}" unless date == "..."
   end
   
   def in_program?(date)

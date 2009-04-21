@@ -19,6 +19,7 @@ class BookingsController < ApplicationController
   
   def create
     @booking = Booking.new params[:booking]
+    
     if @booking.save
       redirect_to @booking
     else
@@ -43,9 +44,14 @@ class BookingsController < ApplicationController
   end
   
   def destroy
-    @booking = Booking.find(params[:id])
+    @booking = Booking.find_by_code(params[:id])
     @booking.destroy
     redirect_to bookings_url
+  end
+  
+  def submit
+    booking = Booking.find_by_code(params[:id])
+    BookingMailer.deliver_confirmation_email(booking)
   end
   
   private

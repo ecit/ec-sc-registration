@@ -29,6 +29,7 @@ class DateRange < ActiveRecord::Base
   # End date < Start date
   def validate
     errors.add("departure before arrival ") if self.end_date < self.start_date
+    #errors.add("first booking date is the first of July" if self.end_date ==)
   end
   
   def nr_of_days

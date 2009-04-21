@@ -17,22 +17,27 @@ class Booking < ActiveRecord::Base
   
   validates_associated :adults
   validates_associated :children
-  
   validates_associated :date_ranges
   
   before_create :make_booking_code
   
-  accepts_nested_attributes_for :adults, :allow_destroy => true#, :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
-  accepts_nested_attributes_for :children, :allow_destroy => true#, :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
-  accepts_nested_attributes_for :date_ranges, :allow_destroy => true #, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+  #before_save :sanitize_date_ranges
+  
+  accepts_nested_attributes_for :adults, :allow_destroy => true,
+                                :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
+  accepts_nested_attributes_for :children, :allow_destroy => true,
+                                :reject_if => proc { |attrs| attrs['first_name'].blank? && attrs['last_name'].blank? }  
+  accepts_nested_attributes_for :date_ranges, :allow_destroy => true
   
   def to_param
     self.code
   end
 
   def days_in_itinerary
-    days = []
+    days, tmp_range = [], []
     arriving_or_departing = ["morning", "afternoon", "evening"]
+
+    # list = (a .. b).inject([]){|accum, date| accum << date}
     
     self.date_ranges.each do |date_range|
       date_range.dates.each do |date|
@@ -56,11 +61,16 @@ class Booking < ActiveRecord::Base
     elsif date > ProgramDay.first.date
       return "Dissolving"
     end
-  end  
-  
+  end 
+    
   private
   
+  def collapse_date_ranges
+    dates = self.date_ranges.map {|date_range| [date_range.start_date, date_range.end_date] }
+    
+  end
+  
   def make_booking_code
-    self.code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    self.code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join ).first(10)
   end
 end
